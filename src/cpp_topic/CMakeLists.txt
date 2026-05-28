@@ -21,6 +21,7 @@ add_executable(talker src/talker.cpp)
 add_executable(custom_get_msg src/custom_get_msg.cpp)
 add_executable(custom_send_msg src/custom_send_msg.cpp)
 add_executable(system_status_publisher src/system_status_publisher.cpp)
+add_executable(talker_param src/talker_param.cpp)
 
 
 ament_target_dependencies(turtle_circle rclcpp geometry_msgs turtlesim)
@@ -31,6 +32,7 @@ ament_target_dependencies(talker rclcpp geometry_msgs turtlesim)
 ament_target_dependencies(custom_get_msg rclcpp status_interfaces)
 ament_target_dependencies(custom_send_msg rclcpp status_interfaces)
 ament_target_dependencies(system_status_publisher rclcpp status_interfaces)
+ament_target_dependencies(talker_param rclcpp std_msgs)
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -42,7 +44,11 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-install(TARGETS turtle_circle turtle_control turtle_patrol talker listenr custom_send_msg custom_get_msg system_status_publisher
+install(TARGETS turtle_circle turtle_control turtle_patrol talker listenr custom_send_msg custom_get_msg system_status_publisher talker_param
 DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY launch
+DESTINATION share/${PROJECT_NAME}
 )
 ament_package()

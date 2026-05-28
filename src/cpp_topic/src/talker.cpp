@@ -10,7 +10,7 @@ class Talker:public rclcpp::Node{
     public:
     Talker(const std::string &node_name):Node(node_name){
         publisher_=this->create_publisher<std_msgs::msg::String>("/my_topic",10);
-        timer_=this->create_wall_timer(std::chrono::microseconds(1000),[this](){my_callback();});
+        timer_=this->create_wall_timer(std::chrono::milliseconds(1000),[this](){my_callback();});
     }
 
     void my_callback(){//因为发布消息是主动的，所以一般不需要消息，他一直发
